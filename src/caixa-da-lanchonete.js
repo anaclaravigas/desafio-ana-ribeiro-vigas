@@ -102,6 +102,18 @@ function verificaItemsPrincipais(pedido) {
             return 'Item extra não pode ser pedido sem o principal'
         }
     }
+    return pedido
+}
+
+function calculaValorTotal(pedido) {
+    let valorBruto = 0
+    for (const {qtd, valor} of pedido.itens) {
+        valorBruto += qtd * valor
+    }
+    console.log(valorBruto)
+    const valorAjuste = formasDePagamento[pedido.metodoDePagamento]
+    const valorLiquido = valorBruto * valorAjuste
+    return `R$ ${valorLiquido.toFixed(2).replace('.', ',')}`;
 }
 
 
@@ -119,6 +131,7 @@ class CaixaDaLanchonete {
             validaEntrada,
             converterItems,
             verificaItemsPrincipais,
+            calculaValorTotal,
         ]
 
         for (const op of operacoes) {

@@ -52,8 +52,9 @@ const cardapio = {
 
 
 /**
- * Calcula o valor da compra
+ * Valida a entrada
  * @param {Pedido} pedido
+ * @returns {Pedido|string} 
  */
 function validaEntrada(pedido) {
     if (pedido.itens.length === 0) {
@@ -68,6 +69,7 @@ function validaEntrada(pedido) {
 /**
  * Converte a lista de pedidos para objetos
  * @param {Pedido} pedido
+ * @returns {Pedido|string} 
  */
 function converterItems(pedido) {
     const itemsEncontrados = []
@@ -94,6 +96,12 @@ function converterItems(pedido) {
     return pedido
 }
 
+
+/**
+ * Verifica se todos os itens adicionais do pedido possuem seus respectivos itens principais.
+ * @param {Pedido} pedido
+ * @returns {Pedido|string} 
+ */
 function verificaItemsPrincipais(pedido) {
     for (const item of pedido.itens) {
         const { principal } = item
@@ -106,6 +114,11 @@ function verificaItemsPrincipais(pedido) {
     return pedido
 }
 
+/**
+ * Calcula o valor total do pedido, considerando os itens e a forma de pagamento.
+ * @param {Pedido} pedido
+ * @returns {string} 
+ */
 function calculaValorTotal(pedido) {
     let valorBruto = 0
     for (const {qtd, valor} of pedido.itens) {

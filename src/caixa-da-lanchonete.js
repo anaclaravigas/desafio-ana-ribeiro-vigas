@@ -93,6 +93,16 @@ function converterItems(pedido) {
     return pedido
 }
 
+function verificaItemsPrincipais(pedido) {
+    for (const item of pedido.itens) {
+        const { principal } = item
+        if (!principal) continue
+        const itemPrincipal = pedido.itens.find(({ codigo }) => codigo === principal)
+        if (!itemPrincipal) {
+            return 'Item extra não pode ser pedido sem o principal'
+        }
+    }
+}
 
 
 class CaixaDaLanchonete {
@@ -108,6 +118,7 @@ class CaixaDaLanchonete {
         const operacoes = [
             validaEntrada,
             converterItems,
+            verificaItemsPrincipais,
         ]
 
         for (const op of operacoes) {

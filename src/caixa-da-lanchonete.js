@@ -1,55 +1,12 @@
+import { formasDePagamento } from "./formas-de-pagamento"
+import { cardapio } from "./cardapio"
+
 /**
  * Objeto que representa um pedido
  * @typedef {Object} Pedido
  * @property {string} metodoDePagamento - Método de pagamento para o pedido.
  * @property {Array.<string>} itens - Lista de itens no pedido.
  */
-
-
-
-const formasDePagamento = {
-    'dinheiro': .95,
-    'credito': 1.03,
-    'debito': 1,
-}
-
-const cardapio = {
-    cafe: {
-        descricao: 'Café',
-        valor: 3.00
-    },
-    chantily: {
-        descricao: 'Chantily (extra do Café)',
-        valor: 1.50,
-        principal: 'cafe',
-    },
-    suco: {
-        descricao: 'Suco Natural',
-        valor: 6.20
-    },
-    sanduiche: {
-        descricao: 'Sanduíche',
-        valor: 6.50
-    },
-    queijo: {
-        descricao: 'Queijo (extra do sanduíche)',
-        valor: 2.00,
-        principal: 'sanduiche',
-    },
-    salgado: {
-        descricao: 'Salgado',
-        valor: 7.25
-    },
-    combo1: {
-        descricao: '1 Suco e 1 Sanduíche',
-        valor: 9.50
-    },
-    combo2: {
-        descricao: '1 café e 1 sanduíche',
-        valor: 7.50
-    },
-}
-
 
 /**
  * Valida a entrada
@@ -121,7 +78,7 @@ function verificaItemsPrincipais(pedido) {
  */
 function calculaValorTotal(pedido) {
     let valorBruto = 0
-    for (const {qtd, valor} of pedido.itens) {
+    for (const { qtd, valor } of pedido.itens) {
         valorBruto += qtd * valor
     }
     console.log(valorBruto)
@@ -136,7 +93,7 @@ class CaixaDaLanchonete {
     /**
      * Calcula o valor da compra
      * @param {string} metodoDePagamento
-     * @param {Array.<string>} itens - Descrição do item.
+     * @param {Array.<string>} itens
      */
     calcularValorDaCompra(metodoDePagamento, itens) {
         const pedido = { metodoDePagamento, itens }

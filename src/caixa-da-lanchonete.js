@@ -73,15 +73,16 @@ function converterItems(pedido) {
     const itemsEncontrados = []
     for (const item of pedido.itens) {
         const [codigo, qtd] = item.split(',')
+        const qtdValue = parseInt(qtd)
         if (!cardapio.hasOwnProperty(codigo)) {
             return 'Item inválido!'
         }
-        if (qtd === 0) {
+        if (qtdValue === 0) {
             return 'Quantidade inválida!'
         }
         const { valor, descricao, principal } = cardapio[codigo]
         itemsEncontrados.push({
-            qtd,
+            qtd: qtdValue,
             codigo,
             valor,
             descricao,
